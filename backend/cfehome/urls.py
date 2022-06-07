@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('api/search/', include('search.urls')),
     path('api/products/', include('products.urls')),
     path('api/v2/', include('cfehome.routers')),
+    path('', TemplateView.as_view(template_name='index.html')),
 ]
 
 # localhost:8000/api/
