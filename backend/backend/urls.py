@@ -23,7 +23,7 @@ urlpatterns = [
     path('api/articles/', include('articles.urls')),
     path('api/search/', include('search.urls')),
     path('api/products/', include('products.urls')),
-    path('api/v2/', include('cfehome.routers')),
+    path('api/v2/', include('backend.routers')),
     path('', TemplateView.as_view(template_name='index.html')),
 ]
 
