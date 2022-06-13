@@ -1,3 +1,2 @@
-# drf-rest-api
-Django Rest Framework API
-A test API for the ecommerce web-app Kaos-nutrition 
+# KaosNutritionShop
+Ecommerce app for Kaos nutrition using React Js and DRF Py
