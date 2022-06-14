@@ -1,4 +1,4 @@
-"""cfehome URL Configuration
+"""backend URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -15,16 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-    path('api/articles/', include('articles.urls')),
-    path('api/search/', include('search.urls')),
-    path('api/products/', include('products.urls')),
-    path('api/v2/', include('backend.routers')),
-    path('', TemplateView.as_view(template_name='index.html')),
+    path ('api/', include('base.urls')),
 ]
-
-# localhost:8000/api/
