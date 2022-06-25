@@ -9,6 +9,7 @@ import { listProductDetails } from '../actions/productActions'
 
 function ProductScreen() {
   const[qty, setQty] = useState(1)
+  const {id} = useParams()
 
   const productId = useParams();
   let navigate = useNavigate();
