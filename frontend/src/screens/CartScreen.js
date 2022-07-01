@@ -6,16 +6,17 @@ import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
 function CartScreen({}) {
-  const location = useLocation()
+  const {location} = useLocation()
   const {id} = useParams()
   const productId = id
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
-  
-   const dispatch = useDispatch()
+  const qty = location ? Number(location.split('=')[1]) : 1
+  const history = useNavigate();
+
+  const dispatch = useDispatch()
 
   const cart = useSelector(state => state.cart)
   const { cartItems } = cart
-  console.log('cartItems:', cartItems)
+  // console.log('cartItems:', cartItems)
 
    useEffect(() => {
       if (productId) {
@@ -23,21 +24,20 @@ function CartScreen({}) {
       }
    }, [dispatch, productId, qty])
 
-   const navigate = useNavigate();
 
    const removeFromCartHandler = (id) => {
       dispatch(removeFromCart(id));
-      navigate('/cart')
+      history('/cart')
    }
 
    const changeQuantityHandler = (item, e) => {
-    dispatch(addToCart(item.product, Number(e.target.value)));
-    navigate('/cart');
+      dispatch(addToCart(item.product, Number(e.target.value)));
+      history('/cart');
   };
 
    const checkoutHandler = () => {
-      navigate('/shipping')
-   } 
+      history('/shipping')
+  } 
 
   return (
       <Row>

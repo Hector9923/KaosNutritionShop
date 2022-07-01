@@ -9,10 +9,10 @@ import { listProductDetails } from '../actions/productActions'
 
 function ProductScreen() {
   const[qty, setQty] = useState(1)
-  const {id} = useParams()
+  // const {id} = useParams()
+  let navigate = useNavigate();
 
   const productId = useParams();
-  let navigate = useNavigate();
   const dispatch = useDispatch()
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product} = productDetails

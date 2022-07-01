@@ -14,10 +14,10 @@ function LoginScreen() {
 
     const dispatch = useDispatch()
 
-    const location = useLocation()
+    const {location} = useLocation()
     const navigate = useNavigate();
 
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    const redirect = location ? location.split('=')[1] : '/'
 
     const userLogin = useSelector(state => state.userLogin)
     const {error, loading, userInfo } = userLogin
@@ -70,7 +70,7 @@ function LoginScreen() {
 
             <Row className='py-3'>
                 <Col>
-                    New Customer? 
+                    New Customer?  
                     <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
                         Register
                     </Link>
