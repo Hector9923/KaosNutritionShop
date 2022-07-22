@@ -24,7 +24,6 @@ function CartScreen({}) {
       }
    }, [dispatch, productId, qty])
 
-
    const removeFromCartHandler = (id) => {
       dispatch(removeFromCart(id));
       history('/cart')
@@ -37,6 +36,7 @@ function CartScreen({}) {
 
    const checkoutHandler = () => {
       history('/shipping')
+      // /login?redirect=shipping
   } 
 
   return (

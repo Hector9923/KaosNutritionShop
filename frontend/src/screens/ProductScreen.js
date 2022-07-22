@@ -9,7 +9,6 @@ import { listProductDetails } from '../actions/productActions'
 
 function ProductScreen() {
   const[qty, setQty] = useState(1)
-  // const {id} = useParams()
   let navigate = useNavigate();
 
   const productId = useParams();
@@ -107,7 +106,7 @@ function ProductScreen() {
                       <Button 
                         onClick={addToCartHandler}
                         className='btn-block' 
-                        disabled={product.countInStock == 0} 
+                        disabled={product.countInStock <= 0} 
                         type='button'>
                         Add to Cart
                       </Button>
