@@ -8,6 +8,7 @@ from base.models import Product, Order, OrderItem, ShippingAddress
 from base.serializers import ProductSerializer, OrderSerializer
 
 from rest_framework import status
+from datetime import datetime
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -15,7 +16,7 @@ def addOrderItems(request):
     user = request.user
     data = request.data
 
-    OrderItems = data['orderItems']
+    orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:
         return Response({'detail': 'No Order Items'}, status= status.HTTP_400_BAD_REQUEST)
@@ -23,11 +24,11 @@ def addOrderItems(request):
 
         # 1 Create order
         order = Order.objects.create(
-            user = user,
-            paymentMethod = data['paymentMethod'],
-            taxPrice = data['taxPrice'],
-            shippingPrice = data['shippingPrice'],
-            totalPrice = data['totalPrice']
+            user=user,
+            paymentMethod=data['paymentMethod'],
+            taxPrice=data['taxPrice'],
+            shippingPrice=data['shippingPrice'],
+            totalPrice=data['totalPrice']
         )
 
         # 2 Create shipping address
@@ -68,6 +69,14 @@ def getOrders(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def getMyOrders(request):
+    user = request.user
+    orders = user.order_set.all()
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getOrderById(request, pk):
 
     user = request.user
@@ -82,4 +91,14 @@ def getOrderById(request, pk):
                     status=status.HTTP_400_BAD_REQUEST)
     except:
         return Response({'detail':'Order does not exist'}, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateOrderToPaid(request, pk):
+    order = Order.objects.get(_id=pk)
+
+    order.isPaid = True
+    order.paidAt = datetime.now()
+    order.save()
+    return Response('Order was paid')
