@@ -27,7 +27,7 @@ function UserListScreen() {
         } else {
             history('/login')
         }
-    }, [dispatch, history, successDelete])
+    }, [dispatch, history, successDelete, userInfo])
 
     const deleteHandler = (id) => {
 
@@ -51,7 +51,7 @@ function UserListScreen() {
                                 <th>NAME</th>
                                 <th>EMAIL</th>
                                 <th>ADMIN</th>
-                                <th></th>
+                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         
@@ -65,7 +65,8 @@ function UserListScreen() {
                                         <i className='fas fa-check' style={{color:'green'}}></i>
                                     ) : (
                                             <i className='fas fa-times' style={{color:'red'}}></i>
-                                        )}</td>
+                                        )}
+                                    </td>
                                     
                                     <td>
                                         <LinkContainer to={`/admin/user/${user._id}/edit`}>
