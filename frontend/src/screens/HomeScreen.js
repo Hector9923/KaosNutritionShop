@@ -13,8 +13,6 @@ function HomeScreen() {
   const productList = useSelector(state => state.productList)
   const { error, loading, products } = productList
 
-  // let keyword = useNavigate.location.search
-
   useEffect(() => {
     dispatch(listProducts())
 
