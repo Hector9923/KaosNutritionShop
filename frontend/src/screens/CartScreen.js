@@ -10,6 +10,11 @@ function CartScreen({}) {
   const {id} = useParams()
   const productId = id
   const qty = location ? Number(location.split('=')[1]) : 1
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+  
+
   let history = useNavigate();
 
   const dispatch = useDispatch()
@@ -34,8 +39,11 @@ function CartScreen({}) {
   };
 
    const checkoutHandler = () => {
-      history('/shipping')
-      // /login?redirect=shipping
+      if (userInfo) {
+        history('/shipping')
+      } else {
+        history('/login')
+      }
   } 
 
   return (
